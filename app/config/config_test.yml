@@ -21,8 +21,10 @@ liip_functional_test:
 
 doctrine:
     dbal:
-        default_connection: default
-        connections:
-            default:
-                driver:   pdo_sqlite
-                path:     %kernel.cache_dir%/test.db
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%_test'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8

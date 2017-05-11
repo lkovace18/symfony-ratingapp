@@ -44,9 +44,16 @@ class Uri {
 	/**
 	 * @var int
 	 *
-	 * @ORM\Column(name="sum_rating", type="decimal")
+	 * @ORM\Column(name="sum_rating", type="integer")
 	 */
 	private $sumRating;
+
+	/**
+	 * @var decimal
+	 *
+	 * @ORM\Column(name="score", type="decimal", precision=5, scale=2)
+	 */
+	private $score;
 
 	/**
 	 * @ORM\OneToMany(targetEntity="UriRating", mappedBy="uri")
@@ -163,5 +170,27 @@ class Uri {
 	 */
 	public function getRatings() {
 		return $this->ratings;
+	}
+
+	/**
+	 * Set score
+	 *
+	 * @param string $score
+	 *
+	 * @return Uri
+	 */
+	public function setScore($score) {
+		$this->score = $score;
+
+		return $this;
+	}
+
+	/**
+	 * Get score
+	 *
+	 * @return string
+	 */
+	public function getScore() {
+		return $this->score;
 	}
 }

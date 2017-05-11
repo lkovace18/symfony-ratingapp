@@ -1,13 +1,62 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
-</html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
+
+  <title>{% block pagetitle %}Welcome !{% endblock %}</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.css" 
+  rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+
+<body>
+    <section class="hero is-info is-fullheight is-bold">
+
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <h1 class="title">
+              {% block title %}RateMe{% endblock %}
+              </h1>
+              <h1 class="subtitle">
+                  {% block subtitle %}...{% endblock %}
+                  </h1>
+              </div>
+          </div>
+
+          <div class="hero-foot">
+            <nav class="tabs">
+              <div class="container has-text-centered">
+                <ul>
+                  <li class="is-active">
+                      <a href="#">How to set up</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+  </div>
+</section>
+{% if app.request.hasPreviousSession %}
+ {% for type, messages in app.session.flashbag.all() %}
+   {% for message in messages %}
+     <div class="notification  is-{{ type }}">
+       {{ message }}
+   </div>
+{% endfor %}
+{% endfor %}
+{% endif %}
+
+<div class="box">
+ {% block body %}{% endblock %}   
+ </div>
+ {% block javascripts %}{% endblock %}
+ </body>
+ </html>

@@ -58,7 +58,7 @@ class LoadUriRatingData extends AbstractFixture implements OrderedFixtureInterfa
 		$sixthUriRating = new UriRating();
 		$sixthUriRating->setUri($this->getReference('third-uri'));
 		$sixthUriRating->setVisitorId('c0594');
-		$sixthUriRating->setRating(5);
+		$sixthUriRating->setRating(4);
 		$sixthUriRating->setCreatedAt(Carbon::now()->subHours(3));
 		$sixthUriRating->setUpdatedAt(Carbon::now()->subHours(3));
 		$manager->persist($sixthUriRating);

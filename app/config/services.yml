@@ -4,6 +4,17 @@ parameters:
     #parameter_name: value
 
 services:
+    find_or_create_uri:
+        class: AppBundle\Service\FindOrCreateUri
+        arguments: ['@doctrine.orm.entity_manager', '@parse_url']
+
+    vote_for_uri:
+        class: AppBundle\Service\VoteForUri
+        arguments: ['@doctrine.orm.entity_manager', '@find_or_create_uri']
+
+    parse_url:
+        class: AppBundle\Service\ParseUrl
+
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']

@@ -2,16 +2,20 @@
 
 namespace AppBundle\Controller;
 
-use FOS\RestBundle\Controller\Annotations\Get;
+use AppBundle\Api\ApiResponse;
 use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("api")
+ */
 class RatingController extends FOSRestController {
 
 	/**
-	 * GET Specific Uri Rating
+	 * POST Specific Uri Rating
 	 *
 	 * @ApiDoc(
 	 *  resource=true,
@@ -29,10 +33,25 @@ class RatingController extends FOSRestController {
 	 *  }
 	 * )
 	 *
-	 * @Get("/rating/votes", name="rating_list_votes")
+	 * @Post("/rating", name="rating_site_votes")
 	 */
 	public function getUriRatingAction(Request $request) {
-		//
+
+		$data = json_decode($request->request->get('data'));
+
+		$uri = $this->container
+			->get('find_or_create_uri')
+			->handle($data->uri);
+
+		$data = array(
+			'uri' => $uri->getUri(),
+			'score' => $uri->getScore(),
+		);
+
+		return (new ApiResponse(
+			200,
+			$data
+		))->build();
 	}
 
 	/**
@@ -66,10 +85,19 @@ class RatingController extends FOSRestController {
 	 *  } *
 	 * )
 	 *
-	 * @Post("/rating/votes", name="rating_vote")
+	 * @Post("/rating/vote", name="rating_vote")
 	 */
 	public function voteForUriAction(Request $request) {
-		//
+		$data = json_decode($request->request->get('data'));
+
+		$vote = $this->container
+			->get('vote_for_uri')
+			->handle($data->uri, $data->visitor_id, $data->rating);
+
+		return (new ApiResponse(
+			200,
+			$vote->formatResponse()
+		))->build();
 	}
 
 }
