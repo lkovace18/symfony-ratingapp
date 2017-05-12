@@ -55,7 +55,7 @@ Rate Application
 
 
 ### Api
-if application is installed you can visit http://<your-site>/api/doc for more information
+If application is installed you can visit `http://{your-site}/api/doc` for more information
 
 basic information
 
