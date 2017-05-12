@@ -10,6 +10,8 @@ Rating Application
 
 [View live demo](http://rateme.link2web.net/)
 
+If you are new ti symfony go learn with me: [Blog](https://link2web.net/blog/2017/05/12/fun-with-symfony-3/)
+
 
 ## Documentation
 
