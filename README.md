@@ -1,69 +1,147 @@
-Symfony Standard Edition
+[![Build Status](https://img.shields.io/travis/lkovace18/symfony-ratingapp/master.svg?style=flat-square)](https://travis-ci.org/lkovace18/symfony-ratingapp/)
+[![StyleCI](https://styleci.io/repos/000/shield)](https://styleci.io/repos/000)
+
+Rate Application
 ========================
 
-Welcome to the Symfony Standard Edition - a fully-functional Symfony
-application that you can use as the skeleton for your new applications.
+* Rate web page with js code snippet. 
+* Api endpoints for voting and getting data for current web page.
 
-For details on how to download and get started with Symfony, see the
-[Installation][1] chapter of the Symfony Documentation.
 
-What's inside?
+## Documentation
+
+### Installation
+
+- clone project
+- configure database and mailer in `app/config/parameters.yml`
+- run commands from application root directory
+```bash
+    composer install
+    php bin/console doctrine:database:create
+    php bin/console doctrine:schema:create
+```
+
+- for start dummy data run command from application root directory
+```bash
+    php bin/console doctrine:fixtures:load
+```
+ 
+
+### Running Tests
+
+- run commands from application root directory
+```bash
+    php bin/console doctrine:database:create --env=test
+    php bin//console doctrine:schema:create --env=test
+    phpunit
+```
+
+
+### Edditing JS
+- run command from application root directory
+```bash
+    npm install or yarn
+```
+
+- for development run command 
+```bash
+    npm run watch or yarn run watch 
+```
+
+- for production run command 
+```bash
+    npm run production or yarn run production 
+```
+
+
+### Api
+if application is installed you can visit http://<your-site>/api/doc for more information
+
+basic information
+
+#### POST /rating/
+
+Request
+```json
+    {
+      data: {
+        uri: "some_uri",
+      }
+    }
+```
+
+Success response - status code 200
+```json
+    {
+      status: "success",
+      data: {
+          uri: "some_uri",
+          score: 4.12  
+      }
+    }
+```
+
+Faliure response - status code 400
+```json
+    {
+      status: "faliure",
+      errors: {
+            /* list of errors */
+      }
+    }
+```
+
+#### POST /rating/vote
+
+Request
+```json
+    {
+      data: {
+        visitor_id: "some_visitor_id",
+        uri: "some_uri",
+        rating: 3
+      }
+    }
+```
+
+Success response - status code 200
+```json
+    {
+      status: "success",
+      data: {
+          uri: "some_uri",
+          rating: 3,
+          score: 4.12  
+      }
+    }
+```
+
+Faliure response - status code 400
+```json
+    {
+      status: "faliure",
+      errors: {
+            /* list of errors */
+      }
+    }
+```
+
+Whats next
 --------------
 
-The Symfony Standard Edition is configured with the following defaults:
+Roadmap:
 
-  * An AppBundle you can use to start coding;
+  * optimize tests
 
-  * Twig as the only configured template engine;
+  * add console command to purge unraded sites (cron)
 
-  * Doctrine ORM/DBAL;
+  * add api option for getting domain rating based on domain page ratings;
 
-  * Swiftmailer;
+  * add api option for getting visitor site ratings;
 
-  * Annotations enabled for everything.
+  * refactor widget js ( visitors can change mind )
 
-It comes pre-configured with the following bundles:
 
-  * **FrameworkBundle** - The core Symfony framework bundle
+## License
 
-  * [**SensioFrameworkExtraBundle**][6] - Adds several enhancements, including
-    template and routing annotation capability
-
-  * [**DoctrineBundle**][7] - Adds support for the Doctrine ORM
-
-  * [**TwigBundle**][8] - Adds support for the Twig templating engine
-
-  * [**SecurityBundle**][9] - Adds security by integrating Symfony's security
-    component
-
-  * [**SwiftmailerBundle**][10] - Adds support for Swiftmailer, a library for
-    sending emails
-
-  * [**MonologBundle**][11] - Adds support for Monolog, a logging library
-
-  * **WebProfilerBundle** (in dev/test env) - Adds profiling functionality and
-    the web debug toolbar
-
-  * **SensioDistributionBundle** (in dev/test env) - Adds functionality for
-    configuring and working with Symfony distributions
-
-  * [**SensioGeneratorBundle**][13] (in dev/test env) - Adds code generation
-    capabilities
-
-  * **DebugBundle** (in dev/test env) - Adds Debug and VarDumper component
-    integration
-
-All libraries and bundles included in the Symfony Standard Edition are
-released under the MIT or BSD license.
-
-Enjoy!
-
-[1]:  https://symfony.com/doc/3.2/setup.html
-[6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
-[7]:  https://symfony.com/doc/3.2/doctrine.html
-[8]:  https://symfony.com/doc/3.2/templating.html
-[9]:  https://symfony.com/doc/3.2/security.html
-[10]: https://symfony.com/doc/3.2/email.html
-[11]: https://symfony.com/doc/3.2/logging.html
-[12]: https://symfony.com/doc/3.2/assetic/asset_management.html
-[13]: https://symfony.com/doc/current/bundles/SensioGeneratorBundle/index.html
+Symfony rating-app is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
