@@ -38,7 +38,7 @@ class LandingControllerTest extends WebTestCase {
 
 		$crawler = $client->request('GET', '/');
 		$this->assertStatusCode(200, $client);
-		$link = $crawler->selectLink('Api Documentation')->link();
+		$link = $crawler->selectLink('API Documentation')->link();
 
 		$client->request('GET', $link->getUri());
 

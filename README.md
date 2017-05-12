@@ -140,12 +140,22 @@ Roadmap:
   *  Add Dusk for functional tests ( https://gist.github.com/kbond/bf86368e46090fb2ffaec0e5cbe91ea8 )
 
   * Add console command to purge unrated sites (cron)
-
+  
+  * Add console command to sync sum users, sum rating and average score (cron)
+    - Use DQL for example:
+    ```mysql 
+      SELECT ur.uri_id, u.uri, COUNT(DISTINCT ur.visitorId) voters, SUM(ur.rating) as sum_rating, avg(ur.rating) as page_rating
+      FROM uri_rating ur
+      JOIN uri u ON u.id = ur.uri_id
+      GROUP BY ur.uri_id 
+    ```
   * add API option for getting domain rating based on domain page ratings
 
   * add API option for getting visitor site ratings
 
   * Refactor widget js ( visitors can change mind )
+  
+  * Visitor can only vote once per page ( server side implementation )
 
 
 ## License
