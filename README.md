@@ -64,8 +64,8 @@ Basic information
 Request
 ```json
     {
-      'data': {
-        'uri': "some_uri",
+      "data": {
+        "uri": "some_uri",
       }
     }
 ```
@@ -73,10 +73,10 @@ Request
 Success response - status code 200
 ```json
     {
-      'status': "success",
-      'data': {
-          'uri': "some_uri",
-          'score': 4.12  
+      "status": "success",
+      "data": {
+          "uri": "some_uri",
+          "score": 4.12  
       }
     }
 ```
@@ -84,10 +84,10 @@ Success response - status code 200
 Failure response - status code 400
 ```json
     {
-      'status': "failure",
-        'errors': {
-          'validation': {
-              'field-name': 'validation-error-message',
+      "status": "failure",
+        "errors": {
+          "validation": {
+              "field-name": "validation-error-message",
           }
       }
     }
@@ -98,10 +98,10 @@ Failure response - status code 400
 Request
 ```json
     {
-      'data': {
-        'visitor_id': "some_visitor_id",
-        'uri': "some_uri",
-        'rating': 3
+      "data": {
+        "visitor_id": "some_visitor_id",
+        "uri": "some_uri",
+        "rating": 3
       }
     }
 ```
@@ -109,11 +109,11 @@ Request
 Success response - status code 200
 ```json
     {
-      'status': 'success',
-      'data': {
-          'uri': 'some_uri',
-          'rating': 3,
-          'score': 4.12  
+      "status": "success",
+      "data": {
+          "uri": "some_uri",
+          "rating": 3,
+          "score": 4.12  
       }
     }
 ```
@@ -121,10 +121,10 @@ Success response - status code 200
 Failure response - status code 400
 ```json
     {
-      "status": 'failure',
-      'errors': {
-        'validation': {
-            'field-name': 'validation-error-message',
+      "status": "failure",
+      "errors": {
+        "validation": {
+            "field-name": "validation-error-message",
         }
       }
     }
