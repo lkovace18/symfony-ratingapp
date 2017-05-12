@@ -1,5 +1,5 @@
 [![Build Status](https://img.shields.io/travis/lkovace18/symfony-ratingapp/master.svg?style=flat-square)](https://travis-ci.org/lkovace18/symfony-ratingapp/)
-[![StyleCI](https://styleci.io/repos/000/shield)](https://styleci.io/repos/000)
+[![StyleCI](https://styleci.io/repos/91046493/shield)](https://styleci.io/repos/91046493)
 
 Rate Application
 ========================
