@@ -2,8 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class LandingController extends Controller
 {
@@ -12,9 +12,8 @@ class LandingController extends Controller
      */
     public function showIndexAction()
     {
-        return $this->render('AppBundle:Landing:show_index.html.twig', array(
+        return $this->render('AppBundle:Landing:show_index.html.twig', [
             // ...
-        ));
+        ]);
     }
-
 }

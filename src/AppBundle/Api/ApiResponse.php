@@ -5,74 +5,81 @@ namespace AppBundle\Api;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
- * A wrapper for building api response
+ * A wrapper for building api response.
  */
-class ApiResponse {
+class ApiResponse
+{
+    /**
+     * @var int
+     */
+    private $statusCode;
 
-	/**
-	 * @var int
-	 */
-	private $statusCode;
+    /**
+     * @var array
+     */
+    private $data = [];
 
-	/**
-	 * @var array
-	 */
-	private $data = array();
+    /**
+     * @var array
+     */
+    private $errors = [];
 
-	/**
-	 * @var array
-	 */
-	private $errors = array();
+    public function __construct(Int $statusCode = 200, array $data = [])
+    {
+        $this->statusCode = $statusCode;
+        $this->data = $data;
+    }
 
-	public function __construct(Int $statusCode = 200, Array $data = array()) {
-		$this->statusCode = $statusCode;
-		$this->data = $data;
-	}
+    public function toArray()
+    {
+        if ($this->hasErrors()) {
+            return array_merge(
+                [
+                    'status' => 'faliure',
+                ],
+                [
+                    'errors' => $this->errors,
+                ]
+            );
+        } else {
+            return array_merge(
+                [
+                    'status' => 'success',
+                ],
+                [
+                    'data' => $this->data,
+                ]
+            );
+        }
+    }
 
-	public function toArray() {
-		if ($this->hasErrors()) {
-			return array_merge(
-				array(
-					'status' => 'faliure',
-				),
-				array(
-					'errors' => $this->errors,
-				)
-			);
-		} else {
-			return array_merge(
-				array(
-					'status' => 'success',
-				),
-				array(
-					'data' => $this->data,
-				)
-			);
-		}
-	}
+    public function build()
+    {
+        $response = new JsonResponse($this->toArray(), $this->getStatusCode());
+        if ($this->hasErrors()) {
+            $response->headers->set('Content-Type', 'application/problem+json');
+        }
 
-	public function build() {
-		$response = new JsonResponse($this->toArray(), $this->getStatusCode());
-		if ($this->hasErrors()) {
-			$response->headers->set('Content-Type', 'application/problem+json');
-		}
+        return $response;
+    }
 
-		return $response;
-	}
+    public function setData($name, $value)
+    {
+        $this->data[$name] = $value;
+    }
 
-	public function setData($name, $value) {
-		$this->data[$name] = $value;
-	}
+    public function setErrors($name, $value)
+    {
+        $this->errors[$name] = $value;
+    }
 
-	public function setErrors($name, $value) {
-		$this->errors[$name] = $value;
-	}
+    public function hasErrors()
+    {
+        return !empty($this->errors);
+    }
 
-	public function hasErrors() {
-		return !empty($this->errors);
-	}
-
-	public function getStatusCode() {
-		return $this->statusCode;
-	}
+    public function getStatusCode()
+    {
+        return $this->statusCode;
+    }
 }

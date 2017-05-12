@@ -7,194 +7,209 @@ use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Uri
+ * Uri.
  *
  * @ORM\Table(name="uri")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UriRepository")
  */
-class Uri {
-	/**
-	 * Hook timestampable behavior
-	 * updates createdAt, updatedAt fields
-	 */
-	use TimestampableEntity;
+class Uri
+{
+    /*
+     * Hook timestampable behavior
+     * updates createdAt, updatedAt fields
+     */
+    use TimestampableEntity;
 
-	/**
-	 * @var int
-	 *
-	 * @ORM\Column(name="id", type="guid")
-	 * @ORM\Id
-	 * @ORM\GeneratedValue(strategy="UUID")
-	 */
-	private $id;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="guid")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="UUID")
+     */
+    private $id;
 
-	/**
-	 * @var string
-	 *
-	 * @Assert\NotBlank()
-	 * @Assert\Url()
-	 *
-	 * @ORM\Column(name="uri", type="string", length=255, unique=true)
-	 */
-	private $uri;
+    /**
+     * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Url()
+     *
+     * @ORM\Column(name="uri", type="string", length=255, unique=true)
+     */
+    private $uri;
 
-	/**
-	 * @var int
-	 *
-	 * @ORM\Column(name="sum_users", type="integer")
-	 */
-	private $sumUsers;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="sum_users", type="integer")
+     */
+    private $sumUsers;
 
-	/**
-	 * @var int
-	 *
-	 * @ORM\Column(name="sum_rating", type="integer")
-	 */
-	private $sumRating;
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="sum_rating", type="integer")
+     */
+    private $sumRating;
 
-	/**
-	 * @var decimal
-	 *
-	 * @ORM\Column(name="score", type="decimal", precision=5, scale=2)
-	 */
-	private $score;
+    /**
+     * @var decimal
+     *
+     * @ORM\Column(name="score", type="decimal", precision=5, scale=2)
+     */
+    private $score;
 
-	/**
-	 * @ORM\OneToMany(targetEntity="UriRating", mappedBy="uri")
-	 */
-	private $ratings;
+    /**
+     * @ORM\OneToMany(targetEntity="UriRating", mappedBy="uri")
+     */
+    private $ratings;
 
-	/**
-	 * Get id
-	 *
-	 * @return int
-	 */
-	public function getId() {
-		return $this->id;
-	}
+    /**
+     * Get id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
-	/**
-	 * Set uri
-	 *
-	 * @param string $uri
-	 *
-	 * @return Uri
-	 */
-	public function setUri($uri) {
-		$this->uri = $uri;
+    /**
+     * Set uri.
+     *
+     * @param string $uri
+     *
+     * @return Uri
+     */
+    public function setUri($uri)
+    {
+        $this->uri = $uri;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get uri
-	 *
-	 * @return string
-	 */
-	public function getUri() {
-		return $this->uri;
-	}
+    /**
+     * Get uri.
+     *
+     * @return string
+     */
+    public function getUri()
+    {
+        return $this->uri;
+    }
 
-	/**
-	 * Set sumUsers
-	 *
-	 * @param integer $sumUsers
-	 *
-	 * @return Uri
-	 */
-	public function setSumUsers($sumUsers) {
-		$this->sumUsers = $sumUsers;
+    /**
+     * Set sumUsers.
+     *
+     * @param int $sumUsers
+     *
+     * @return Uri
+     */
+    public function setSumUsers($sumUsers)
+    {
+        $this->sumUsers = $sumUsers;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get sumUsers
-	 *
-	 * @return int
-	 */
-	public function getSumUsers() {
-		return $this->sumUsers;
-	}
+    /**
+     * Get sumUsers.
+     *
+     * @return int
+     */
+    public function getSumUsers()
+    {
+        return $this->sumUsers;
+    }
 
-	/**
-	 * Set sumRating
-	 *
-	 * @param integer $sumRating
-	 *
-	 * @return Uri
-	 */
-	public function setSumRating($sumRating) {
-		$this->sumRating = $sumRating;
+    /**
+     * Set sumRating.
+     *
+     * @param int $sumRating
+     *
+     * @return Uri
+     */
+    public function setSumRating($sumRating)
+    {
+        $this->sumRating = $sumRating;
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * Get sumRating
-	 *
-	 * @return int
-	 */
-	public function getSumRating() {
-		return $this->sumRating;
-	}
-	/**
-	 * Constructor
-	 */
-	public function __construct() {
-		$this->ratings = new \Doctrine\Common\Collections\ArrayCollection();
-	}
+    /**
+     * Get sumRating.
+     *
+     * @return int
+     */
+    public function getSumRating()
+    {
+        return $this->sumRating;
+    }
 
-	/**
-	 * Add rating
-	 *
-	 * @param \AppBundle\Entity\UriRating $rating
-	 *
-	 * @return Uri
-	 */
-	public function addRating(\AppBundle\Entity\UriRating $rating) {
-		$this->ratings[] = $rating;
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->ratings = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
-		return $this;
-	}
+    /**
+     * Add rating.
+     *
+     * @param \AppBundle\Entity\UriRating $rating
+     *
+     * @return Uri
+     */
+    public function addRating(\AppBundle\Entity\UriRating $rating)
+    {
+        $this->ratings[] = $rating;
 
-	/**
-	 * Remove rating
-	 *
-	 * @param \AppBundle\Entity\UriRating $rating
-	 */
-	public function removeRating(\AppBundle\Entity\UriRating $rating) {
-		$this->ratings->removeElement($rating);
-	}
+        return $this;
+    }
 
-	/**
-	 * Get ratings
-	 *
-	 * @return \Doctrine\Common\Collections\Collection
-	 */
-	public function getRatings() {
-		return $this->ratings;
-	}
+    /**
+     * Remove rating.
+     *
+     * @param \AppBundle\Entity\UriRating $rating
+     */
+    public function removeRating(\AppBundle\Entity\UriRating $rating)
+    {
+        $this->ratings->removeElement($rating);
+    }
 
-	/**
-	 * Set score
-	 *
-	 * @param string $score
-	 *
-	 * @return Uri
-	 */
-	public function setScore($score) {
-		$this->score = $score;
+    /**
+     * Get ratings.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getRatings()
+    {
+        return $this->ratings;
+    }
 
-		return $this;
-	}
+    /**
+     * Set score.
+     *
+     * @param string $score
+     *
+     * @return Uri
+     */
+    public function setScore($score)
+    {
+        $this->score = $score;
 
-	/**
-	 * Get score
-	 *
-	 * @return string
-	 */
-	public function getScore() {
-		return round($this->score, 2);
-	}
+        return $this;
+    }
+
+    /**
+     * Get score.
+     *
+     * @return string
+     */
+    public function getScore()
+    {
+        return round($this->score, 2);
+    }
 }

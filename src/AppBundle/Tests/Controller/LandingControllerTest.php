@@ -12,5 +12,4 @@ class LandingControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
     }
-
 }
