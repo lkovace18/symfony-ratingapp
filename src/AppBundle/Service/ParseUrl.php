@@ -12,38 +12,23 @@ class ParseUrl {
 	/**
 	 * @param string
 	 */
-	private $fullUrl;
+	private $formatedUrl;
 
 	/**
 	 * @param array
 	 */
 	private $urlComponents;
 
-	public function handle($uriString) {
-
-		if (!$url = $this->validateUrl($uriString)) {
-			return false;
-		}
-
-		$this->urlComponents = parse_url($url);
+	public function handle($urlString) {
+		$this->urlComponents = parse_url($urlString);
 
 		$this->domain = str_replace('www.', '', $this->urlComponents['host']);
-		$this->buildFullUrl();
+		$this->buildFormatedUrl();
 
 		return $this;
 	}
 
-	private function validateUrl($url) {
-		$url = filter_var($url, FILTER_SANITIZE_URL);
-		if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
-			return $url;
-		}
-
-		return false;
-
-	}
-
-	private function buildFullUrl() {
+	private function buildFormatedUrl() {
 		$urlBuilder = $this->domain;
 
 		if (isset($this->urlComponents['path'])) {
@@ -54,14 +39,14 @@ class ParseUrl {
 			$urlBuilder .= $this->urlComponents['query'];
 		}
 
-		$this->fullUrl = $urlBuilder;
+		$this->formatedUrl = $urlBuilder;
 	}
 
 	public function getDomain() {
 		return $this->domain;
 	}
 
-	public function getFullUrl() {
-		return $this->fullUrl;
+	public function getFormatedUrl() {
+		return $this->formatedUrl;
 	}
 }

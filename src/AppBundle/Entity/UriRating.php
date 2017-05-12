@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * UriRating
@@ -30,12 +31,21 @@ class UriRating {
 	/**
 	 * @var string
 	 *
+	 * @Assert\Length(
+	 *      min = 2,
+	 *      max = 255,
+	 * )
 	 * @ORM\Column(name="visitorId", type="string", length=255)
 	 */
 	private $visitorId;
 
 	/**
 	 * @var int
+	 *
+	 * @Assert\Range(
+	 *      min = 1,
+	 *      max = 10,
+	 * )
 	 *
 	 * @ORM\Column(name="rating", type="smallint")
 	 */

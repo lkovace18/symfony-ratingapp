@@ -15,7 +15,7 @@ class ParseUrlTest extends WebTestCase {
 
 		$this->assertEquals(
 			'example.com/some-cool/blog-post',
-			$parser->getFullUrl()
+			$parser->getFormatedUrl()
 		);
 
 		$httpParser = new ParseUrl;
@@ -25,8 +25,8 @@ class ParseUrlTest extends WebTestCase {
 		$httpsParser->handle('https://www.example.com/other-cool/blog-post');
 
 		$this->assertEquals(
-			$httpParser->getFullUrl(),
-			$httpsParser->getFullUrl()
+			$httpParser->getFormatedUrl(),
+			$httpsParser->getFormatedUrl()
 		);
 
 		$wwwParser = new ParseUrl;
@@ -36,8 +36,8 @@ class ParseUrlTest extends WebTestCase {
 		$noWwwParser->handle('http://example.com/some-cool/app');
 
 		$this->assertEquals(
-			$wwwParser->getFullUrl(),
-			$noWwwParser->getFullUrl()
+			$wwwParser->getFormatedUrl(),
+			$noWwwParser->getFormatedUrl()
 		);
 
 		$parser = new ParseUrl;
@@ -46,7 +46,7 @@ class ParseUrlTest extends WebTestCase {
 
 		$this->assertEquals(
 			'example.com/index',
-			$parser->getFullUrl()
+			$parser->getFormatedUrl()
 		);
 
 	}

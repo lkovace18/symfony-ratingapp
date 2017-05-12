@@ -18,7 +18,7 @@ class RatingControllerTest extends WebTestCase {
 		);
 
 		$response = $this->clientPost('/api/rating', [
-			'data' => json_encode($data),
+			'data' => $data,
 		]);
 
 		$this->assertJsonResponse($response, 200);
@@ -42,7 +42,7 @@ class RatingControllerTest extends WebTestCase {
 		);
 
 		$response = $this->clientPost('/api/rating', [
-			'data' => json_encode($data),
+			'data' => $data,
 		]);
 
 		$this->assertJsonResponse($response, 200);
@@ -54,8 +54,6 @@ class RatingControllerTest extends WebTestCase {
 				'score' => 0,
 			],
 		];
-
-		dump($this->getJsonResponse($response));
 
 		$this->assertArraySubset($expected, $this->getJsonResponse($response));
 
@@ -80,7 +78,7 @@ class RatingControllerTest extends WebTestCase {
 		);
 
 		$response = $this->clientPost('/api/rating/vote', [
-			'data' => json_encode($data),
+			'data' => $data,
 		]);
 
 		$this->assertJsonResponse($response, 200);

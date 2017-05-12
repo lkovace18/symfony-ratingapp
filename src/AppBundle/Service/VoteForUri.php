@@ -5,6 +5,11 @@ namespace AppBundle\Service;
 use AppBundle\Entity\UriRating;
 use Carbon\Carbon;
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Validator\Constraints\Url;
+use Symfony\Component\Validator\Validation;
 
 class VoteForUri {
 
@@ -29,6 +34,11 @@ class VoteForUri {
 	private $uri;
 
 	/**
+	 * @var array
+	 */
+	private $errors = array();
+
+	/**
 	 * Create a Job VoteForUri
 	 *
 	 * @param Doctrine\ORM\EntityManager $em
@@ -40,12 +50,65 @@ class VoteForUri {
 	}
 
 	public function handle($uriString, $visitorId, $rating) {
-		$this->uri = $this->uriProvider->handle($uriString);
+		$this->validate($uriString, $visitorId, $rating);
+
+		if ($this->hasErrors()) {
+			return $this;
+		}
+
+		$this->uri = $this->uriProvider->handle($uriString)->getUri();
 		$this->vote = $this->createNewUriVote($this->uri, $visitorId, $rating);
 
 		$this->calculateNewUriScore();
 
 		return $this;
+	}
+
+	public function hasErrors() {
+		return 0 !== count($this->errors);
+	}
+
+	public function getErrors() {
+		return $this->errors;
+	}
+
+	private function validate($uriString, $visitorId, $rating) {
+
+		$validator = Validation::createValidator();
+		$violations = $validator->validate($uriString, array(
+			new NotBlank(),
+			new Url(),
+		));
+
+		if (0 !== count($violations)) {
+			foreach ($violations as $violation) {
+				$this->errors[] = $violation->getMessage();
+			}
+		}
+
+		$validator = Validation::createValidator();
+		$violations = $validator->validate($visitorId, array(
+			new NotBlank(),
+			new Length(array('min' => 2, 'max' => 250)),
+		));
+
+		if (0 !== count($violations)) {
+			foreach ($violations as $violation) {
+				$this->errors[] = $violation->getMessage();
+			}
+		}
+
+		$validator = Validation::createValidator();
+		$violations = $validator->validate($rating, array(
+			new NotBlank(),
+			new Range(array('min' => 1, 'max' => 10)),
+		));
+
+		if (0 !== count($violations)) {
+			foreach ($violations as $violation) {
+				$this->errors[] = $violation->getMessage();
+			}
+		}
 	}
 
 	public function calculateNewUriScore() {
@@ -64,15 +127,15 @@ class VoteForUri {
 	}
 
 	private function createNewUriVote($uri, $visitorId, $rating) {
-		$newUri = new UriRating;
-		$newUri->setUri($uri);
-		$newUri->setRating($rating);
-		$newUri->setVisitorId($visitorId);
-		$newUri->setCreatedAt(Carbon::now());
-		$newUri->setUpdatedAt(Carbon::now());
-		$this->em->persist($newUri);
+		$newUriRating = new UriRating;
+		$newUriRating->setUri($uri);
+		$newUriRating->setRating($rating);
+		$newUriRating->setVisitorId($visitorId);
+		$newUriRating->setCreatedAt(Carbon::now());
+		$newUriRating->setUpdatedAt(Carbon::now());
+		$this->em->persist($newUriRating);
 		$this->em->flush();
 
-		return $newUri;
+		return $newUriRating;
 	}
 }

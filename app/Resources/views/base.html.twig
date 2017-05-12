@@ -9,54 +9,42 @@
   <meta name="author" content="">
   <link rel="icon" href="../../favicon.ico">
 
-  <title>{% block pagetitle %}Welcome !{% endblock %}</title>
+  <title>{% block pagetitle %}Welcome dear Voter !{% endblock %}</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.css" 
   rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
   {% block stylesheets %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
+  </head>
 
-<body>
-    <section class="hero is-info is-fullheight is-bold">
-
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <h1 class="title">
-              {% block title %}RateMe{% endblock %}
+  <body>
+    <section class="hero is-info is-medium is-bold">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+            {% block title %}RateMe{% endblock %}
+            </h1>
+            <h1 class="subtitle">
+              {% block subtitle %}...{% endblock %}
               </h1>
-              <h1 class="subtitle">
-                  {% block subtitle %}...{% endblock %}
-                  </h1>
-              </div>
+            </div>
           </div>
+        </section>
+        {% if app.request.hasPreviousSession %}
+         {% for type, messages in app.session.flashbag.all() %}
+           {% for message in messages %}
+             <div class="notification  is-{{ type }}">
+               {{ message }}
+             </div>
+           {% endfor %}
+         {% endfor %}
+       {% endif %}
 
-          <div class="hero-foot">
-            <nav class="tabs">
-              <div class="container has-text-centered">
-                <ul>
-                  <li class="is-active">
-                      <a href="#">How to set up</a>
-                  </li>
-              </ul>
-          </div>
-      </nav>
-  </div>
-</section>
-{% if app.request.hasPreviousSession %}
- {% for type, messages in app.session.flashbag.all() %}
-   {% for message in messages %}
-     <div class="notification  is-{{ type }}">
-       {{ message }}
-   </div>
-{% endfor %}
-{% endfor %}
-{% endif %}
-
-<div class="box">
- {% block body %}{% endblock %}   
- </div>
- {% block javascripts %}{% endblock %}
- </body>
- </html>
+       
+    {% block body %}{% endblock %}   
+        
+    {% block javascripts %}{% endblock %}
+    <script src="/js/app.js" ></script>
+  </body>
+</html>

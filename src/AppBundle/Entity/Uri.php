@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Uri
@@ -29,6 +30,9 @@ class Uri {
 
 	/**
 	 * @var string
+	 *
+	 * @Assert\NotBlank()
+	 * @Assert\Url()
 	 *
 	 * @ORM\Column(name="uri", type="string", length=255, unique=true)
 	 */
@@ -191,6 +195,6 @@ class Uri {
 	 * @return string
 	 */
 	public function getScore() {
-		return $this->score;
+		return round($this->score, 2);
 	}
 }

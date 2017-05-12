@@ -1,7 +1,85 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Landing:showIndex{% endblock %}
+{% block title %} RateMe App {% endblock %}
+{% block subtitle %} <strong>let</strong> visitors rate() your site <br> with no fuss, just include snippet in site code and see what is trending there,<strong> great! :)</strong> {% endblock %}
 
 {% block body %}
-<h1>Welcome to the Landing:showIndex page</h1>
+<div class="hero is-light is-medium is-bold">
+<div class="box">
+<div id="rating-app">
+    <rating title="Try it, rate me ;)"></rating>
+      {# <rating visitor-id=''></rating> #}
+</div>
+</div>
+
+
+<section class="hero is-light is-medium is-bold">
+<div class="hero-body">
+    <div class="container has-text-centered">
+        <h2 class="title">You like it, wanna try?</h2>
+         <p class="subtitle" >copy snippet on your page and get strarted ...  easy </p>
+    <pre> 
+        <code class="html has-text-left">
+           &#60script href="http://rateme.com/js/app.js"&#62&#60/script&#62
+           &#60div id="rating-app"&#62
+                &#60rating title="Try it, rate me ;)"&#62&#60/rating&#62
+            &#60/div&#62
+        </code>
+    </pre>
+    </div>
+
+    <div class="container has-text-centered">
+        <br>
+        <p class="subtitle" >You want to add your visitor id based on your login or some other system ... no problem, just add param <strong>visitor-id</strong> </p>
+        <pre> 
+            <code class="html has-text-left">
+             &#60script href="http://rateme.com/js/app.js"&#62&#60/script&#62
+             &#60div id="rating-app"&#62
+                &#60rating title="Try it, rate me ;)" visitor-id="your-visitor-id"&#62&#60/rating&#62
+             &#60/div&#62
+         </code>
+     </pre>
+ </div>
+ </div>
+</section>
+
+<div class="box is-dark">
+    <div class="container has-text-centered">
+        <h2 class="title">you just dont like how it looks and you want make your own widget<h2>
+        <p class="subtitle">sure no problem, visit api documentetion and have fun</p>
+        <a class="button is-info is-outlined" href="/api/doc">Api Documentation</a>
+        <hr>
+        <h2 class="title">you think this is cool ... but you want to make it better<h2>
+        <p class="subtitle">nice ... i approve ... go fork it on github </p>
+        <a class="button" href="https://github.com/lkovace/rateme-app">
+          <span class="icon is-small">
+            <i class="fa fa-github"></i>
+        </span>
+        <span>Github</span>
+    </a>
+ </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        <strong>RateMe</strong> by <a href="#">Luka Kovačević</a>. The source code is licensed
+        <a href="http://opensource.org/licenses/mit-license.php">MIT</a>.
+      </p>
+      <p>
+        <a class="icon" href="https://github.com/lkovace/rateme-app">
+          <i class="fa fa-github"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
 {% endblock %}
+
+ {% block javascripts %}
+   <link rel="stylesheet" href="//cdn.jsdelivr.net/highlight.js/9.11.0/styles/dracula.min.css">
+<script src="//cdn.jsdelivr.net/highlight.js/9.11.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+ {% endblock %}
+
