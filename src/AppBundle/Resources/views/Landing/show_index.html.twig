@@ -20,7 +20,7 @@
          <p class="subtitle" >copy snippet on your page and get strarted ...  easy </p>
     <pre> 
         <code class="html has-text-left">
-           &#60script href="http://rateme.com/js/app.js"&#62&#60/script&#62
+           &#60script href="{{ app.request.getSchemeAndHttpHost() }}/js/app.js"&#62&#60/script&#62
            &#60div id="rating-app"&#62
                 &#60rating title="Try it, rate me ;)"&#62&#60/rating&#62
             &#60/div&#62
@@ -33,7 +33,7 @@
         <p class="subtitle" >You want to add your visitor id based on your login or some other system ... no problem, just add param <strong>visitor-id</strong> </p>
         <pre> 
             <code class="html has-text-left">
-             &#60script href="http://rateme.com/js/app.js"&#62&#60/script&#62
+             &#60script href="{{ app.request.getSchemeAndHttpHost() }}/js/app.js"&#62&#60/script&#62
              &#60div id="rating-app"&#62
                 &#60rating title="Try it, rate me ;)" visitor-id="your-visitor-id"&#62&#60/rating&#62
              &#60/div&#62
@@ -45,8 +45,8 @@
 
 <div class="box is-dark">
     <div class="container has-text-centered">
-        <h2 class="title">you just dont like how it looks and you want make your own widget<h2>
-        <p class="subtitle">sure no problem, visit api documentetion and have fun</p>
+        <h2 class="title">you just don't like how it looks and you want make your own widget<h2>
+        <p class="subtitle">sure no problem, visit api documentation and have fun</p>
         <a class="button is-info is-outlined" href="/api/doc">Api Documentation</a>
         <hr>
         <h2 class="title">you think this is cool ... but you want to make it better<h2>
