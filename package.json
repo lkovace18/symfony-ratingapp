@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "dev": "node_modules/.bin/webpack",
-    "production": "NODE_ENV=production node_modules/.bin/webpack",
+    "dev": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules",
     "watch": "npm run dev -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

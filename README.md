@@ -1,7 +1,7 @@
 [![Build Status](https://img.shields.io/travis/lkovace18/symfony-ratingapp/master.svg?style=flat-square)](https://travis-ci.org/lkovace18/symfony-ratingapp/)
 [![StyleCI](https://styleci.io/repos/91046493/shield)](https://styleci.io/repos/91046493)
 
-Rate Application
+Rating Application
 ========================
 
 * Rate web page with js code snippet. 
@@ -12,16 +12,16 @@ Rate Application
 
 ### Installation
 
-- clone project
-- configure database and mailer in `app/config/parameters.yml`
-- run commands from application root directory
+- Clone project
+- Configure database and mailer in  `app/config/parameters.yml`
+- Run commands from application root directory
 ```bash
     composer install
     php bin/console doctrine:database:create
     php bin/console doctrine:schema:create
 ```
 
-- for start dummy data run command from application root directory
+- You can add dummy data, run command from application root directory
 ```bash
     php bin/console doctrine:fixtures:load
 ```
@@ -29,7 +29,7 @@ Rate Application
 
 ### Running Tests
 
-- run commands from application root directory
+- Run commands from application root directory
 ```bash
     php bin/console doctrine:database:create --env=test
     php bin//console doctrine:schema:create --env=test
@@ -37,35 +37,35 @@ Rate Application
 ```
 
 
-### Edditing JS
-- run command from application root directory
+### Editing JS
+- Run command from application root directory
 ```bash
     npm install or yarn
 ```
 
-- for development run command 
+- For development run command
 ```bash
     npm run watch or yarn run watch 
 ```
 
-- for production run command 
+- For production run command
 ```bash
     npm run production or yarn run production 
 ```
 
 
-### Api
+### API
 If application is installed you can visit `http://{your-site}/api/doc` for more information
 
-basic information
+Basic information
 
 #### POST /rating/
 
 Request
 ```json
     {
-      data: {
-        uri: "some_uri",
+      'data': {
+        'uri': "some_uri",
       }
     }
 ```
@@ -73,20 +73,22 @@ Request
 Success response - status code 200
 ```json
     {
-      status: "success",
-      data: {
-          uri: "some_uri",
-          score: 4.12  
+      'status': "success",
+      'data': {
+          'uri': "some_uri",
+          'score': 4.12  
       }
     }
 ```
 
-Faliure response - status code 400
+Failure response - status code 400
 ```json
     {
-      status: "faliure",
-      errors: {
-            /* list of errors */
+      'status': "failure",
+        'errors': {
+          'validation': {
+              'field-name': 'validation-error-message',
+          }
       }
     }
 ```
@@ -96,10 +98,10 @@ Faliure response - status code 400
 Request
 ```json
     {
-      data: {
-        visitor_id: "some_visitor_id",
-        uri: "some_uri",
-        rating: 3
+      'data': {
+        'visitor_id': "some_visitor_id",
+        'uri': "some_uri",
+        'rating': 3
       }
     }
 ```
@@ -107,39 +109,43 @@ Request
 Success response - status code 200
 ```json
     {
-      status: "success",
-      data: {
-          uri: "some_uri",
-          rating: 3,
-          score: 4.12  
+      'status': 'success',
+      'data': {
+          'uri': 'some_uri',
+          'rating': 3,
+          'score': 4.12  
       }
     }
 ```
 
-Faliure response - status code 400
+Failure response - status code 400
 ```json
     {
-      status: "faliure",
-      errors: {
-            /* list of errors */
+      'status': 'failure',
+      'errors': {
+        'validation': {
+            'field-name': 'validation-error-message',
+        }
       }
     }
 ```
 
-Whats next
+What's next
 --------------
 
 Roadmap:
 
-  * optimize tests
+  * Optimize tests
+   
+  *  Add Dusk for functional tests ( https://gist.github.com/kbond/bf86368e46090fb2ffaec0e5cbe91ea8 )
 
-  * add console command to purge unraded sites (cron)
+  * Add console command to purge unrated sites (cron)
 
-  * add api option for getting domain rating based on domain page ratings;
+  * add API option for getting domain rating based on domain page ratings
 
-  * add api option for getting visitor site ratings;
+  * add API option for getting visitor site ratings
 
-  * refactor widget js ( visitors can change mind )
+  * Refactor widget js ( visitors can change mind )
 
 
 ## License

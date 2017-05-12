@@ -23,7 +23,7 @@ class ApiResponse {
 	 */
 	private $errors = [];
 
-	public function __construct(Int $statusCode, array $data) {
+	public function __construct($statusCode, array $data = null) {
 		$this->statusCode = $statusCode;
 		$this->data = $data;
 	}
@@ -32,7 +32,7 @@ class ApiResponse {
 		if ($this->hasErrors()) {
 			return array_merge(
 				[
-					'status' => 'faliure',
+					'status' => 'failure',
 				],
 				[
 					'errors' => $this->errors,
@@ -63,7 +63,7 @@ class ApiResponse {
 		$this->data[$name] = $value;
 	}
 
-	public function setErrors($name, $value) {
+	public function setErrors($name = null, $value) {
 		$this->errors[$name] = $value;
 	}
 

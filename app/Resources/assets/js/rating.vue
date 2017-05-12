@@ -5,14 +5,13 @@
     <p v-if="error" class="notification is-danger" v-text="error"></p>
     <div class="star-rating">
       <fieldset>
-        <div class="star" :class="{ 'star-active' : (i <= rating) }" v-for="i in range(1, 11)">
+        <div class="star" :class="{ 'star-active' : (i <= rating) }" v-for="i in 10">
           <input @click.prevent="vote(i)" type="radio" :id="i" name="rating" :value="i" />
           <label :for="i">{{ i }} stars</label>
         </div>
       </fieldset>
       <p>Page score {{ score }} / 10</p>
     </div>
-
   </div>
 </template>
 <script>
@@ -37,7 +36,6 @@
       }
 
       this.$cookie.set('rate-me-visitor', this.visitor, 60)
-
 
       if (this.$cookie.get(this.visitor + this.uri)) {
         this.rated = true;
@@ -90,7 +88,6 @@
       }, (response) => {
         this.rated = false;
         this.error = 'Uphs, we have problem ... try again ?'
-        console.log(response.body)
       })
     },
     getRating () {
@@ -103,7 +100,7 @@
       .then((response) => {
         this.score = response.data.data.score
       }, (response) => {
-        console.log(response)
+        this.error = 'Uphs, we have problem fetching data, try reload page'
       })
     },
     fourDigit() {
@@ -150,9 +147,6 @@
     position: absolute;
     clip: rect(0, 0, 0, 0);
   }
-
-
-
   .star-rating {
     font-family: 'FontAwesome';
     margin: 10px auto;
@@ -175,32 +169,24 @@
     font-size: 200%;
     color: #4B77BE;
   }
-
-  .star-active label:before {
-
-  }
-
   .star-active label:hover:before {
     position: relative;
     top: 2px;
     color: #5C97BF;
     content: '\f005';
   }
-
   .star-active label:before {
     position: relative;
     top: 2px;
     color: #5C97BF;
     content: '\f005';
   }
-
   .star-active {
     position: relative;
     top: 2px;
     color: #5C97BF;
     content: '\f005';
   }
-
   .rating-box {
     color: #95a5a6;
     font-family: 'Raleway';
