@@ -8,6 +8,9 @@ Rating Application
 * Api endpoints for voting and getting data for current web page.
 
 
+[View live demo](http://rateme.link2web.net/)
+
+
 ## Documentation
 
 ### Installation
