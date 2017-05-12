@@ -121,7 +121,7 @@ Success response - status code 200
 Failure response - status code 400
 ```json
     {
-      'status': 'failure',
+      "status": 'failure',
       'errors': {
         'validation': {
             'field-name': 'validation-error-message',
