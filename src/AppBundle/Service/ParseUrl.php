@@ -2,51 +2,55 @@
 
 namespace AppBundle\Service;
 
-class ParseUrl {
+class ParseUrl
+{
+    /**
+     * @param string
+     */
+    private $domain;
 
-	/**
-	 * @param string
-	 */
-	private $domain;
+    /**
+     * @param string
+     */
+    private $formatedUrl;
 
-	/**
-	 * @param string
-	 */
-	private $formatedUrl;
+    /**
+     * @param array
+     */
+    private $urlComponents;
 
-	/**
-	 * @param array
-	 */
-	private $urlComponents;
+    public function handle($urlString)
+    {
+        $this->urlComponents = parse_url($urlString);
 
-	public function handle($urlString) {
-		$this->urlComponents = parse_url($urlString);
+        $this->domain = str_replace('www.', '', $this->urlComponents['host']);
+        $this->buildFormatedUrl();
 
-		$this->domain = str_replace('www.', '', $this->urlComponents['host']);
-		$this->buildFormatedUrl();
+        return $this;
+    }
 
-		return $this;
-	}
+    private function buildFormatedUrl()
+    {
+        $urlBuilder = $this->domain;
 
-	private function buildFormatedUrl() {
-		$urlBuilder = $this->domain;
+        if (isset($this->urlComponents['path'])) {
+            $urlBuilder .= $this->urlComponents['path'];
+        }
 
-		if (isset($this->urlComponents['path'])) {
-			$urlBuilder .= $this->urlComponents['path'];
-		}
+        if (isset($this->urlComponents['query'])) {
+            $urlBuilder .= $this->urlComponents['query'];
+        }
 
-		if (isset($this->urlComponents['query'])) {
-			$urlBuilder .= $this->urlComponents['query'];
-		}
+        $this->formatedUrl = $urlBuilder;
+    }
 
-		$this->formatedUrl = $urlBuilder;
-	}
+    public function getDomain()
+    {
+        return $this->domain;
+    }
 
-	public function getDomain() {
-		return $this->domain;
-	}
-
-	public function getFormatedUrl() {
-		return $this->formatedUrl;
-	}
+    public function getFormatedUrl()
+    {
+        return $this->formatedUrl;
+    }
 }
