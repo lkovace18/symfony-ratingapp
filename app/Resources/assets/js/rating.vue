@@ -15,7 +15,7 @@
   </div>
 </template>
 <script>
-
+  import { apiUrl } from './config.js'
   export default {
     name: 'rating',
     mounted () {
@@ -74,7 +74,7 @@
       this.rating = rating
 
       this.$cookie.set(this.visitor + this.uri, this.rating, 60)
-      this.$http.post('http://iways.demo.dev/api/rating/vote',
+      this.$http.post(apiUrl + '/rating/vote',
       { 
         data: {
           visitor_id: this.visitor,
@@ -96,7 +96,7 @@
           uri: this.uri 
         }
       }
-      this.$http.post('http://iways.demo.dev/api/rating', data)
+      this.$http.post(apiUrl + '/rating', data)
       .then((response) => {
         this.score = response.data.data.score
       }, (response) => {
