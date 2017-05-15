@@ -10,7 +10,7 @@ Rating Application
 
 [View live demo](http://rateme.link2web.net/)
 
-If you are new ti symfony go learn with me: [Blog](https://link2web.net/blog/2017/05/12/fun-with-symfony-3/)
+If you are new to symfony go learn with me: [Blog](https://link2web.net/blog/2017/05/12/fun-with-symfony-3/)
 
 
 ## Documentation
@@ -37,7 +37,7 @@ If you are new ti symfony go learn with me: [Blog](https://link2web.net/blog/201
 - Run commands from application root directory
 ```bash
     php bin/console doctrine:database:create --env=test
-    php bin//console doctrine:schema:create --env=test
+    php bin/console doctrine:schema:create --env=test
     phpunit
 ```
 
